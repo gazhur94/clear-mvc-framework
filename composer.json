@@ -1,0 +1,13 @@
+{
+  "autoload": {
+    "classmap": [
+      "core/"
+    ],
+    "files" : [
+      "app/Helpers/functions.php"
+    ],
+    "psr-4" : {
+      "Acme\\" : "app/"
+    }
+  }
+}
