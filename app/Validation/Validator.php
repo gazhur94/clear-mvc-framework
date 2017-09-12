@@ -42,7 +42,6 @@ class Validator {
                 } else {
                     throw new \CoreException($ruleClass . ' doesn\'t exists');
                 }
-
             }
         }
     }
@@ -51,18 +50,4 @@ class Validator {
     {
         return $this->errors;
     }
-
-
-
-//
-//    private function exists($table) {
-//        if (empty(($this->db->get($table, [$this->currentField => $this->arrayForValidation[$this->currentField]])))) {
-//            if (isset($this->fieldNames[$this->currentField])) {
-//                $field = $this->fieldNames[$this->currentField];
-//            } else {
-//                $field = $this->currentField;
-//            }
-//            return $this->addError("Такой {$field} не зарегистрирован");
-//        }
-//    }
 }
