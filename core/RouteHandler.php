@@ -48,4 +48,15 @@ class RouteHandler implements IRouteHandler
             throw new CoreException('Not any route registered for this request method!');
         }
     }
+
+    public static function getRouteByName($name)
+    {
+        $routes = Route::getRoutes();
+        foreach($routes as $route) {
+            if ($route->name === $name) {
+                return $route;
+            }
+        }
+        throw new CoreException('Not found any route with name ' . $name);
+    }
 }

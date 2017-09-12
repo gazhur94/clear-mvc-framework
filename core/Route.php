@@ -6,14 +6,22 @@ class Route implements IRoute
      * @var array for routes objects
      */
     private static $_routes = [];
-
     /**
      * @var array with supported request methods (can be modified)
      */
     protected static $_methods = [
         'get', 'post'
     ];
-
+    /**
+     * @var Route properties
+     */
+    public  $url,
+            $method,
+            $controller,
+            $action,
+            $values = [],
+            $middlewares = [],
+            $name = null;
     /**
      * Set routes from app/Routes.php
      *
@@ -34,13 +42,15 @@ class Route implements IRoute
                 throw new CoreException('Set [\'Controller\' => \'action\'] to route');
             }
 
-            /** Set needed route properties */
+            /** Assign needed route properties */
             $route = new self;
             $route->url = $args[0];
             $route->method = $method;
             $route->controller = $args[1][0];
             $route->action= $args[1][1];
             $route->values = [];
+            $route->middlewares = [];
+            $route->name = null;
 
             /** Put created $route to $_routes array */
             self::$_routes[] = $route;
@@ -51,7 +61,6 @@ class Route implements IRoute
             throw new CoreException($method . ' request method is not available!');
         }
     }
-
     /**
      * Register new middleware for route
      *
@@ -60,21 +69,31 @@ class Route implements IRoute
     public function middleware($middleware)
     {
         $this->middlewares[] = $middleware;
-    }
 
+        return $this;
+    }
+    /**
+     * Set name for route
+     *
+     * @param $name
+     */
+    public function name($name)
+    {
+        $this->name = $name;
+    }
     /**
      * Returns routes array with requested request method
      *
      * @param $method
      * @return array
      */
-    public static function getRoutes($method)
+    public static function getRoutes($method = null)
     {
-        return array_filter(self::$_routes, function($route) use ($method) {
-            return $route->method === $method;
-        });
+        if ($method) {
+            return array_filter(self::$_routes, function($route) use ($method) {
+                return $route->method === $method;
+            });
+        }
+        return self::$_routes;
     }
-
-
-
 }

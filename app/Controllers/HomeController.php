@@ -10,7 +10,7 @@ class HomeController extends Controller
         $var = 'Hello from HomeController@getMain';
         dump($var);
 
-        return $this->view->render(layout('main'), page('main'), [
+        $this->view->render('main', 'main', [
             'name' => $var
         ]);
     }

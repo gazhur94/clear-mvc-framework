@@ -35,6 +35,7 @@ class ComposerStaticInit9c275326b69e3246c4884532fa8e6882
         'IRoute' => __DIR__ . '/../..' . '/core/interfaces/IRoute.php',
         'IRouteHandler' => __DIR__ . '/../..' . '/core/interfaces/IRouteHandler.php',
         'Request' => __DIR__ . '/../..' . '/core/Request.php',
+        'Response' => __DIR__ . '/../..' . '/core/Response.php',
         'Route' => __DIR__ . '/../..' . '/core/Route.php',
         'RouteHandler' => __DIR__ . '/../..' . '/core/RouteHandler.php',
     );

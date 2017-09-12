@@ -12,7 +12,22 @@ class View
             extract($data);
         }
 
+        $page = $this->findView('page', $page);
+
+        $layout = $this->findView('layout', $layout);
+
         require_once $layout;
 
+        return true;
+
+    }
+
+    public function findView($type, $name)
+    {
+        $view = Config::get('path/' . $type . 's'). $name. '.' . $type . '.php';
+        if (!file_exists($view)) {
+            throw new \CoreException($view . ' view is not found');
+        }
+        return $view;
     }
 }

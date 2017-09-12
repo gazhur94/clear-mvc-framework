@@ -11,10 +11,12 @@ error_reporting(E_ALL);
  * Main settings
  */
 
+define('ROOT_DIRECTORY', '');
+
 $GLOBALS['config'] = [
     'database' => [
         'DB_TYPE' => 'mysql',
-        'DB_NAME' => 'my-blog',
+        'DB_NAME' => 'slim',
         'DB_HOST' => '127.0.0.1',
         'username' => 'root',
         'password' => ''
@@ -22,13 +24,11 @@ $GLOBALS['config'] = [
     'cookie' => [
 
     ],
-    'session' => [
-
-    ],
     'path' => [
-        'root' => __DIR__,
-        'views' => __DIR__ . '/app/Views/',
-        'layouts' => __DIR__ . '/app/Views/layouts',
-        'pages' => __DIR__ . '/app/Views/pages',
+        'root' => ROOT_DIRECTORY,
+        'views' => ROOT_DIRECTORY . 'app/Views/',
+        'layouts' => ROOT_DIRECTORY . 'app/Views/layouts/',
+        'pages' => ROOT_DIRECTORY . 'app/Views/pages/',
+        'assets' => ROOT_DIRECTORY . '/public/assets/'
     ],
 ];

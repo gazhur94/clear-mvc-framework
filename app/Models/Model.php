@@ -2,18 +2,18 @@
 
 namespace Acme\Models;
 
-class Model
-{
-    private $db;
+use Acme\Database\QueryBuilder;
 
-    public function __construct()
-    {
-        $this->db = QueryBuilder::new();
-//        $this->checkCookieToken();
-    }
+class Model extends QueryBuilder
+{
 
     public function db()
     {
         return $this->db;
+    }
+
+    public static function rules()
+    {
+        return static::$rules;
     }
 }

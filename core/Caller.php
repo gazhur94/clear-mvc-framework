@@ -39,7 +39,6 @@ class Caller implements ICaller {
         self::middlewaring($route->middlewares, 'after');
 
     }
-
     /**
      * Looping through registered middlewares for route
      * and call it before/after controller
@@ -51,7 +50,7 @@ class Caller implements ICaller {
     public static function middlewaring($middlewares, $event)
     {
         foreach($middlewares as $mw) {
-            $mwClass = 'Acme\\Middlewares\\' . $mw;
+            $mwClass = 'Acme\\Middlewares\\' . ucfirst($mw) . 'Middleware';
             if (!class_exists($mwClass)) {
                 throw new CoreException($mwClass . ' middleware is not registered!');
             }

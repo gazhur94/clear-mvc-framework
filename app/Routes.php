@@ -1,9 +1,12 @@
 <?php
 
-Route::get('/', ['HomeController', 'getMain'])->middleware('TestMiddleware');
-//Route::get('/', 'asd'); //throwing exception
+Route::get('/', ['HomeController', 'getMain'])->name('home');
 
-//Route::get('/id/{userId}/photo{photoId}', ['HomeController', 'getMain']);
+Route::get('auth/signin', ['AuthController', 'getSignIn'])->name('signin');
 
+Route::get('auth/signup', ['AuthController', 'getSignUp'])->name('signup');
 
+Route::post('auth/signup', ['AuthController', 'postSignUp']);
 
+Route::post('auth/signin', ['AuthController', 'postSignIn']);
+//Route::post('auth/signup', ['AuthController', 'postSignUp'])->middleware('csrf');
