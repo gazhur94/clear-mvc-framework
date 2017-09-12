@@ -7,18 +7,6 @@ use Acme\Database\QueryBuilder;
 class Validator {
     private $errors = [];
 
-//$arrayForValidation,
-//        $rules = [],
-//        ;
-
-
-    //    private $currentField = null,;
-//        $fieldNames = [],
-//        $errMsg = [],
-//        $pass = null,
-//        $rules = [],
-//        $arrayForValidation;
-
     //database connecttion
     public function __construct($arrayForValidation, $rules, $messages = null) {
 

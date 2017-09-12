@@ -27,7 +27,7 @@ class AuthController extends Controller
         }
 
         $errors['attempt'] = 'asdasd';
-        
+
         return $this->view->render('main', 'auth/login', ["errors" => $errors]);
     }
 
