@@ -2,19 +2,23 @@
 
 namespace Acme\Views;
 
-use Acme\Helpers\Config;
-
 class View
 {
+    private static $data;
+
     public function render($layout, $page, $data = null) {
 
         if (is_array($data)) {
-            extract($data);
+            self::assign($data);
         }
 
-        $page = $this->findView('page', $page);
+        if (self::$data) {
+            extract(self::$data);
+        }
 
-        $layout = $this->findView('layout', $layout);
+        $page = view('page', $page);
+
+        $layout = view('layout', $layout);
 
         require_once $layout;
 
@@ -22,12 +26,11 @@ class View
 
     }
 
-    public function findView($type, $name)
+    public static function assign($data)
     {
-        $view = Config::get('path/' . $type . 's'). $name. '.' . $type . '.php';
-        if (!file_exists($view)) {
-            throw new \CoreException($view . ' view is not found');
+        foreach($data as $key => $value) {
+            self::$data[$key] = $value;
         }
-        return $view;
     }
+
 }

@@ -12,7 +12,6 @@ class Controller
 
     public function __construct(View $view)
     {
-        Session::start();
         $this->view = $view;
     }
 

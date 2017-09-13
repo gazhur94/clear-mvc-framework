@@ -10,6 +10,8 @@ class Unique extends ValidationRule
     {
         $db = new QueryBuilder();
 
+        dump(($db->table($this->condition)->where([$this->field => ($this->item)])->select()));
+
         return empty($db->table($this->condition)->where([$this->field => ($this->item)])->select());
 
     }

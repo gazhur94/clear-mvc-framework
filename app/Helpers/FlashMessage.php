@@ -17,8 +17,8 @@ class FlashMessage
 
     public static function html($class, $message)
     {
-        $html  = '<div class="row justify-content-center">';
-        $html .= '<div class="alert col-auto alert-' . $class . '" role="alert">';
+        $html  = '<div class="justify-content-center">';
+        $html .= '<div class="alert col-12 text-center alert-' . $class . '" role="alert">';
         $html .= $message;
         $html .= '</div>';
         $html .= '</div>';

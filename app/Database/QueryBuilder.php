@@ -36,21 +36,16 @@ class QueryBuilder
     public function query($sql, $values = []) {
 
 //        dump($sql);
+        $this->sql = '';
 
         if ($query = $this->db->prepare($sql)) {
             if ($query->execute($values)) {
                 $queryVerb = explode(' ', $sql)[0];
                 if ($queryVerb == 'SELECT') {
-//                    if ($query->rowCount()) {
-                    $data = $query->fetchAll(\PDO::FETCH_OBJ);
-//                        $data = $query->fetchAll(\PDO::FETCH_CLASS, 'Acme\\Database\\Data');
-                    $result = new Data;
-                    foreach ($data as $key => $item) {
-                        $result->{$key} = $item;
+                    if ($query->rowCount()) {
+                        return $query->fetchAll(\PDO::FETCH_CLASS, 'Acme\\Database\\Data');
                     }
-                    return $result;
-//                    }
-//                    return null;
+                    return null;
                 } else if ($queryVerb == 'INSERT') {
                     return $this->db->lastInsertId();
                 }

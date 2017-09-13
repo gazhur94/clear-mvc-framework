@@ -19,6 +19,11 @@ class Redirect
         }
     }
 
+    public static function back()
+    {
+        self::url(Session::get('PREVIOUS_PAGE'));
+    }
+
 //    public static function back($message = null, $status = 'success') {
 //        return self::to(Session::get(Config::get('session/previousPage')), $message, $status);
 //    }

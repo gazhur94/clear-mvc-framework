@@ -20,15 +20,12 @@ class AuthController extends Controller
             return $this->view->render('main', 'auth/login', ['errors' => $v->errors()]);
         }
 
-        $userModel = new User;
-
-        if ( $errors['attempt'] = $userModel->login(Input::login(), Input::password(), Input::remember()) ) {
-            return Redirect::route('home');
+        if (!(new User)->signIn(Input::login(), Input::password(), Input::remember()) ) {
+            $errors['attempt'] = 'Wrong username or password!';
+            return $this->view->render('main', 'auth/login', ["errors" => $errors]);
         }
 
-        $errors['attempt'] = 'asdasd';
-
-        return $this->view->render('main', 'auth/login', ["errors" => $errors]);
+        return Redirect::route('home');
     }
 
 
@@ -49,12 +46,11 @@ class AuthController extends Controller
                 'errors' => $v->errors()
             ]);
         }
-//
-//        $userModel = new User;
-//        if (!$userModel->register(Input::username(), Input::email(), Input::password())) {
-//            FlashMessage::danger('Ooops. Something goes wrong! Try to register again!');
-//            return Redirect::route('home');
-//        }
+
+        if (!(new User)->singUp(Input::username(), Input::email(), Input::password())) {
+            FlashMessage::danger('Ooops. Something goes wrong! Try to register again!');
+            return Redirect::route('home');
+        }
 
         FlashMessage::success('You successfully registered! Now you can log in');
         return Redirect::route('home');
@@ -65,5 +61,12 @@ class AuthController extends Controller
     public function getSignUp()
     {
         $this->view->render('main', 'auth/register');
+    }
+
+    public function getSignOut()
+    {
+        (new User)->signOut();
+        FlashMessage::success('You successfully logged out!');
+        return Redirect::back();
     }
 }

@@ -30,16 +30,4 @@ class Session {
             unset($_SESSION[$name]);
         }
     }
-
-//    public static function saveURL() {
-//        $curPage = Config::get('session/currentPage');
-//        $prevPage = Config::get('session/previousPage');
-//        if (self::exists($curPage)) {
-//            $temp = self::get($curPage);
-//        } else {
-//            $temp = '/';
-//        }
-//        self::set($prevPage, $temp);
-//        self::set($curPage, $_SERVER['REQUEST_URI']);
-//    }
 }

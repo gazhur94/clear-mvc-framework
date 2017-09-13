@@ -19,9 +19,9 @@ class Route implements IRoute
             $method,
             $controller,
             $action,
-            $values = [],
-            $middlewares = [],
-            $name = null;
+            $values,
+            $middlewares,
+            $name;
     /**
      * Set routes from app/Routes.php
      *
@@ -49,7 +49,7 @@ class Route implements IRoute
             $route->controller = $args[1][0];
             $route->action= $args[1][1];
             $route->values = [];
-            $route->middlewares = [];
+            $route->middlewares = ['main'];
             $route->name = null;
 
             /** Put created $route to $_routes array */

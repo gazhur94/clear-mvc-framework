@@ -21,14 +21,11 @@ $GLOBALS['config'] = [
         'username' => 'root',
         'password' => ''
     ],
-    'cookie' => [
-
-    ],
     'path' => [
         'root' => ROOT_DIRECTORY,
-        'views' => ROOT_DIRECTORY . 'app/Views/',
         'layouts' => ROOT_DIRECTORY . 'app/Views/layouts/',
         'pages' => ROOT_DIRECTORY . 'app/Views/pages/',
         'assets' => ROOT_DIRECTORY . '/public/assets/'
     ],
+    ''
 ];
