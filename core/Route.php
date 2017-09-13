@@ -66,10 +66,11 @@ class Route implements IRoute
      *
      * @param $middleware
      */
-    public function middleware($middleware)
+    public function middleware(...$middlewares)
     {
-        $this->middlewares[] = $middleware;
-
+        foreach($middlewares as $mw) {
+            $this->middlewares[] = $mw;
+        }
         return $this;
     }
     /**
@@ -80,6 +81,8 @@ class Route implements IRoute
     public function name($name)
     {
         $this->name = $name;
+
+        return $this;
     }
     /**
      * Returns routes array with requested request method

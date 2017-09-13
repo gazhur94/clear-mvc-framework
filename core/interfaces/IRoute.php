@@ -19,7 +19,7 @@ interface IRoute {
     /**
      * Register middleware to route
      * @param $name ClassName of middleware
-     * @return mixed
+     * @return $this
      */
-    public function middleware($name);
+    public function middleware(...$middlewares);
 }
