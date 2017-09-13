@@ -6,6 +6,7 @@
  */
 class App implements IApp
 {
+
     /**
      * Start point of the app
      * with global exception handler
@@ -24,6 +25,12 @@ class App implements IApp
      */
     public function __construct()
     {
+        /** Logic that need only on develop stage */
+        if (DEVELOP_MODE) {
+            ini_set('display_errors', 1);
+            error_reporting(E_ALL);
+            Acme\Database\Connection::get();
+        }
 
         /** Register given routes */
         Boot::script('app/Routes.php');

@@ -11,7 +11,7 @@
     <!--  custom styles  -->
     <link rel="stylesheet" href="<?php echo assets('css/style.css'); ?>">
 
-    <title>Document</title>
+    <title><?php echo $title;?></title>
 </head>
 <body>
 <div class="wrapper">

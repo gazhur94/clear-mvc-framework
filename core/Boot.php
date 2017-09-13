@@ -2,6 +2,7 @@
 
 class Boot implements IBoot
 {
+
     /**
      * Require php file
      * @param string $path

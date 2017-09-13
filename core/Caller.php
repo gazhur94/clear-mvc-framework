@@ -5,6 +5,7 @@
  * Class Caller
  */
 class Caller implements ICaller {
+
     /**
      * @param instance of Route $route
      * @throws CoreException
@@ -13,13 +14,11 @@ class Caller implements ICaller {
     {
         /** For wrong url throw 404 error */
         if (!$route) {
-            //response with header 404
-            die('404!');
+            die(include(view('page', 'errors/404')));
         }
 
         /** Check if Controller file exists */
         $controllerClass = 'Acme\\Controllers\\' . $route->controller;
-
         if (!class_exists($controllerClass)) {
             throw new CoreException('Controller not found!');
         }
@@ -39,6 +38,7 @@ class Caller implements ICaller {
         self::middlewaring($route->middlewares, 'after');
 
     }
+
     /**
      * Looping through registered middlewares for route
      * and call it before/after controller
@@ -54,6 +54,7 @@ class Caller implements ICaller {
             if (!class_exists($mwClass)) {
                 throw new CoreException($mwClass . ' middleware is not registered!');
             }
+            /** call middleware for given route */
             call_user_func([new $mwClass, $event]);
         }
     }

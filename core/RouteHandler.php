@@ -1,7 +1,11 @@
 <?php
 
+/**
+ * Class RouteHandler
+ */
 class RouteHandler implements IRouteHandler
 {
+
     /**
      * @param array $routes
      * @param $url
@@ -13,13 +17,6 @@ class RouteHandler implements IRouteHandler
         if (!empty($routes)) {
             /** Looping through every $routes */
             foreach($routes as $route) {
-
-                /**
-                 * For only '/' route cancel trimming slashes
-                 */
-                if ($route->url !== '/') {
-                    $route->url = trim($route->url, '/');
-                }
 
                 /** Check if route contains variables like 'id/{userId}' */
                 if (preg_match_all('/{[a-zA-Z]{1,}}/', $route->url, $vars)) {
@@ -49,14 +46,22 @@ class RouteHandler implements IRouteHandler
         }
     }
 
-    public static function getRouteByName($name)
+    /**
+     * Return route by property and his value
+     *
+     * @param $param
+     * @param $value
+     * @return object of Route
+     * @throws CoreException
+     */
+    public static function getRouteBy($param ,$value)
     {
         $routes = Route::getRoutes();
         foreach($routes as $route) {
-            if ($route->name === $name) {
+            if ($route->{$param} === $value) {
                 return $route;
             }
         }
-        throw new CoreException('Not found any route with name ' . $name);
+        throw new CoreException('Not found any route with ' . $param . ': ' . $value);
     }
 }

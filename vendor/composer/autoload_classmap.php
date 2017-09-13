@@ -16,7 +16,6 @@ return array(
     'IRoute' => $baseDir . '/core/interfaces/IRoute.php',
     'IRouteHandler' => $baseDir . '/core/interfaces/IRouteHandler.php',
     'Request' => $baseDir . '/core/Request.php',
-    'Response' => $baseDir . '/core/Response.php',
     'Route' => $baseDir . '/core/Route.php',
     'RouteHandler' => $baseDir . '/core/RouteHandler.php',
 );

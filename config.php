@@ -1,19 +1,11 @@
 <?php
 
-/**
- * Only developing stage settings!
- * Must be deleted after release.
- */
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
-
-/**
- * Main settings
- */
-
-define('ROOT_DIRECTORY', '');
+define('DEVELOP_MODE', true);
 
 $GLOBALS['config'] = [
+    'APP_NAME' => 'Project name',
+    'DEFAULT_TITLE' => 'Home page',
+
     'database' => [
         'DB_TYPE' => 'mysql',
         'DB_NAME' => 'slim',
@@ -22,10 +14,8 @@ $GLOBALS['config'] = [
         'password' => ''
     ],
     'path' => [
-        'root' => ROOT_DIRECTORY,
-        'layouts' => ROOT_DIRECTORY . 'app/Views/layouts/',
-        'pages' => ROOT_DIRECTORY . 'app/Views/pages/',
-        'assets' => ROOT_DIRECTORY . '/public/assets/'
+        'layouts' =>  'app/Views/layouts/',
+        'pages' =>  'app/Views/pages/',
+        'assets' => '/public/assets/'
     ],
-    ''
 ];

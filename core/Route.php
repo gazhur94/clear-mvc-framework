@@ -2,16 +2,19 @@
 
 class Route implements IRoute
 {
+
     /**
      * @var array for routes objects
      */
     private static $_routes = [];
+
     /**
      * @var array with supported request methods (can be modified)
      */
     protected static $_methods = [
         'get', 'post'
     ];
+
     /**
      * @var Route properties
      */
@@ -22,6 +25,7 @@ class Route implements IRoute
             $values,
             $middlewares,
             $name;
+
     /**
      * Set routes from app/Routes.php
      *
@@ -61,10 +65,12 @@ class Route implements IRoute
             throw new CoreException($method . ' request method is not available!');
         }
     }
+
     /**
-     * Register new middleware for route
+     * Register middlewares for route
      *
-     * @param $middleware
+     * @param array ...$middlewares
+     * @return $this
      */
     public function middleware(...$middlewares)
     {
@@ -73,17 +79,30 @@ class Route implements IRoute
         }
         return $this;
     }
+
     /**
      * Set name for route
      *
      * @param $name
+     * @return $this
      */
     public function name($name)
     {
         $this->name = $name;
-
         return $this;
     }
+
+    /**
+     * Set page title for route
+     *
+     * @param $title
+     * @return $this
+     */
+    public function title($title) {
+        $this->title = $title;
+        return $this;
+    }
+
     /**
      * Returns routes array with requested request method
      *

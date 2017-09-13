@@ -1,17 +1,40 @@
 <?php
 
+/**
+ * Dump variable with breaking script
+ *
+ * @param $var
+ */
 function ddump($var) {
     die(var_dump($var));
 }
 
+/**
+ * Dump variable
+ *
+ * @param $var
+ */
 function dump($var) {
     var_dump($var);
 }
 
+/**
+ * Return path to assets folder
+ * @param $file
+ * @return string
+ */
 function assets($file) {
     return Acme\Helpers\Config::get('path/assets') . $file;
 }
 
+/**
+ * Return path to view folder
+ *
+ * @param $type
+ * @param $name
+ * @return string
+ * @throws CoreException
+ */
 function view($type, $name) {
     $view = Acme\Helpers\Config::get('path/' . $type . 's'). $name. '.php';
     if (!file_exists($view)) {
@@ -20,32 +43,61 @@ function view($type, $name) {
     return $view;
 }
 
-
+/**
+ * Return url of given name of route
+ *
+ * @param $name
+ * @return mixed
+ */
 function route($name) {
-    $url = RouteHandler::getRouteByName($name)->url;
-    if ($url === '/') {
-        return $url;
-    }
-    return '/' . $url;
+    return RouteHandler::getRouteBy('name', $name)->url;
 }
 
+/**
+ * Return input value of $field
+ *
+ * @param $field
+ * @return mixed
+ */
 function input($field) {
     return Acme\Helpers\Input::$field();
 }
 
+/**
+ * Check if user is logged in
+ *
+ * @return boolean
+ */
 function isLoggedIn() {
     return Acme\Helpers\Session::get('user');
 }
 
+/**
+ * Prints CSRF field
+ */
 function csrf_generate() {
     echo '<input type="hidden" name="csrf" value="' . Acme\Helpers\Token::generate('csrf') . '">';
 }
 
+/**
+ * Prints flash message
+ */
 function flash_message() {
     echo Acme\Helpers\FlashMessage::get();
 }
 
-function input_field($field_name, $label = false, $placeholder = false, $errors = false, $oldData = false, $form_controls = null)
+/**
+ * Generate Input html field with given parameters
+ *
+ * @param $field_name
+ * @param $type
+ * @param bool $label
+ * @param bool $placeholder
+ * @param bool $errors
+ * @param bool $oldData
+ * @param null $form_controls
+ */
+function input_field($field_name, $type, $label = false, $placeholder = false, $errors = false, $oldData = false, $form_controls = null)
 {
     $field = '<div class="form-group';
     if (isset($errors[$field_name]) &&  $form_controls && in_array('danger', $form_controls)) {
@@ -54,15 +106,13 @@ function input_field($field_name, $label = false, $placeholder = false, $errors 
         $field .= ' has-success';
     }
     $field .= "\">\n";
-
+    /** Label tag */
     if ($label) {
         $field .= "\t" . '<label for="' . $field_name . '" class="col col-form-label">' . $label . '</label>' . "\n";
     }
-
     $field .= "\t" . '<div class="col">' . "\n";
-
-    $field .= "\t\t" . '<input type="text" name="' . $field_name . '"';
-
+    /** Input tag */
+    $field .= "\t\t" . '<input type="' . $type . '" name="' . $field_name . '"';
     $field .= ' class="form-control';
     if ($form_controls) {
         foreach ($form_controls as $style) {
@@ -70,25 +120,21 @@ function input_field($field_name, $label = false, $placeholder = false, $errors 
         }
     }
     $field .= ' id="' . $field_name . '"';
-
-
+    /** Placeholder */
     if ($placeholder) {
         $field .= ' placeholder="' . $placeholder . '"';
     }
-
+    /** Value with old data */
     if ($oldData && input($field_name)) {
         $field .= ' value="' . input($field_name) . '"';
     }
     $field .= ">\n";
-
-
+    /** Errors */
     if (isset($errors[$field_name])) {
         $field .= "\t\t" . '<div class="form-control-feedback">' . $errors[$field_name][0] . "</div>\n";
     }
 
     $field .= "\t" . "</div>\n";
-
     $field .= "</div>\n";
-
     echo $field;
 }

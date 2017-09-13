@@ -1,23 +1,23 @@
 <?php
 
+/**
+ * Class Request
+ */
 class Request {
 
-    public static $url = null;
-
+    /**
+     * Current url
+     * @return string
+     */
     public static function url()
     {
-        if (isset($_GET['url'])) {
-            $url = $_GET['url'];
-            self::$url = $url;
-            unset($_GET['url']);
-            return $url;
-        } else if(isset(self::$url)) {
-            return self::$url;
-        } else {
-            return '/';
-        }
+        return $_SERVER['REQUEST_URI'];
     }
 
+    /**
+     * Current Request Method
+     * @return string
+     */
     public static function method() {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }

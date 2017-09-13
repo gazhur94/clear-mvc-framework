@@ -4,9 +4,6 @@ namespace Acme\Controllers;
 
 use Acme\Views\View;
 
-use Acme\Helpers\Session;
-use Illuminate\Http\Response;
-
 class Controller
 {
 
@@ -14,9 +11,4 @@ class Controller
     {
         $this->view = $view;
     }
-
-//    public function render()
-//    {
-//        $this->view->render();
-//    }
 }

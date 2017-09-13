@@ -12,8 +12,6 @@ class AuthController extends Controller
 {
     public function postSignIn()
     {
-        //middleware GUEST
-
         $v = new Validator(Input::all(), User::rules());
 
         if ($v->errors()) {
@@ -36,9 +34,6 @@ class AuthController extends Controller
 
     public function postSignUp()
     {
-        //middleware CSRF
-        //middleware GUEST
-
         $v = new Validator(Input::all(), User::rules());
 
         if ($v->errors()) {
@@ -54,8 +49,6 @@ class AuthController extends Controller
 
         FlashMessage::success('You successfully registered! Now you can log in');
         return Redirect::route('home');
-
-//      $this->response->redirect('home')->message('You successfully registered! Now you can log in')->data(['test' => 'check']);
     }
 
     public function getSignUp()
