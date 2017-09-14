@@ -119,7 +119,7 @@ function input_field($field_name, $type, $label = false, $placeholder = false, $
             $field .= ' form-control-' . $style;
         }
     }
-    $field .= ' id="' . $field_name . '"';
+    $field .= '" id="' . $field_name . '"';
     /** Placeholder */
     if ($placeholder) {
         $field .= ' placeholder="' . $placeholder . '"';
